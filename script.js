@@ -230,27 +230,45 @@ const getQuoteBtn = document.getElementById('getQuoteFromCalc');
 if (getQuoteBtn) {
     getQuoteBtn.addEventListener('click', () => {
         // Collect calculator info
-        const type = document.getElementById('calcWebsiteType').options[document.getElementById('calcWebsiteType').selectedIndex].text;
+        const typeSelect = document.getElementById('calcWebsiteType');
+        const typeName = typeSelect.options[typeSelect.selectedIndex].text.split(' (')[0];
         const total = document.getElementById('calcTotalPrice').innerText;
+        const pages = document.getElementById('calcPages').value;
+
+        // Collect selected features
+        const selectedFeatures = [];
+        document.querySelectorAll('.feature-cb:checked').forEach(cb => {
+            // Get text from the parent label, removing the (+Price) part
+            const featureName = cb.parentElement.innerText.split(' (+')[0].trim();
+            selectedFeatures.push(featureName);
+        });
+
+        let featuresFragment = selectedFeatures.length > 0 ? ` with ${selectedFeatures.join(', ')}` : '';
+        let pagesFragment = pages > 1 ? ` and ${pages} total pages` : ` (${pages} page)`;
 
         // Close modal
-        priceModal.style.display = "none";
+        if (priceModal) priceModal.style.display = "none";
 
-        // Pre-fill form
+        // Pre-fill form dropdown
         const serviceSelect = document.querySelector('#quoteForm select');
         if (serviceSelect) {
-            if (type.includes('Landing')) serviceSelect.value = 'landing';
-            else if (type.includes('Business')) serviceSelect.value = 'website';
-            else if (type.includes('Full System')) serviceSelect.value = 'system';
-            else if (type.includes('Redesign') || type.includes('Bug Fix')) serviceSelect.value = 'fix';
+            const fullTypeText = typeSelect.options[typeSelect.selectedIndex].text;
+            if (fullTypeText.includes('Landing')) serviceSelect.value = 'landing';
+            else if (fullTypeText.includes('Business')) serviceSelect.value = 'website';
+            else if (fullTypeText.includes('Full System')) serviceSelect.value = 'system';
+            else if (fullTypeText.includes('Redesign') || fullTypeText.includes('Bug Fix')) serviceSelect.value = 'fix';
         }
 
+        // Detailed message pre-fill
         if (messageArea) {
-            messageArea.value = `Estimated Quote from Calculator: ${total} for ${type}. Please provide exact details.`;
+            messageArea.value = `I am interested in a ${typeName}${featuresFragment}${pagesFragment}.\n\nEstimated Quote: ${total}.\n\nPlease contact me with more details on how to begin.`;
         }
 
         // Scroll to form
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 }
 
