@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Requirements Checklist - Nairobi Tech Solutions</title>
+    <title>Website Requirements CheckList - Nairobi Tech Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,6 +13,13 @@
             --gray: #6b7280;
             --light-gray: #f3f4f6;
             --border: #e5e7eb;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -21,8 +28,31 @@
             color: var(--dark);
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px 100px;
+            padding: 40px 20px 120px;
             background: #f9fafb;
+        }
+
+        .no-print {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .no-print a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .no-print button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .document {
@@ -53,68 +83,74 @@
             color: var(--gray);
         }
 
+        .client-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+
         h2 {
             background: var(--light-gray);
             padding: 10px 15px;
             border-left: 4px solid var(--primary);
-            font-size: 1.2rem;
-            margin-top: 30px;
+            font-size: 1.1rem;
+            margin: 40px 0 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         h3 {
+            margin: 20px 0 15px;
+            font-size: 1rem;
             border-bottom: 1px solid var(--border);
             padding-bottom: 5px;
-            margin-top: 20px;
             color: var(--primary);
         }
 
-        .form-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            flex: 1;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
         .checklist-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 12px;
+            padding: 10px;
+            border: 1px solid transparent;
+            border-radius: 6px;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.2s;
         }
 
         .checklist-item:hover {
-            color: var(--primary);
+            background: var(--light-gray);
         }
 
-        .checklist-item input[type="checkbox"] {
+        .checklist-item input {
             width: 18px;
             height: 18px;
             cursor: pointer;
         }
 
-        /* Sticky Price Bar */
         .price-sticky {
             position: fixed;
             bottom: 0;
@@ -122,62 +158,51 @@
             width: 100%;
             background: var(--dark);
             color: white;
-            padding: 20px;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            padding: 25px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
+            z-index: 1000;
         }
 
-        .price-display {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #10b981;
+        .total-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--success);
         }
 
-        .price-sticky button {
+        .save-btn {
             background: var(--primary);
             color: white;
+            padding: 15px 30px;
+            border-radius: 6px;
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .price-sticky button:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .footer-note {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid var(--border);
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--gray);
+            font-size: 1rem;
         }
 
         .contact-box {
             background: #eff6ff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .no-print {
-            margin-bottom: 20px;
-            text-align: right;
+            margin-top: 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .contact-box strong {
+            color: var(--primary);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--gray);
+            font-weight: 500;
         }
 
         @media print {
@@ -188,13 +213,13 @@
             }
 
             body {
-                background: white;
                 padding: 0;
+                background: white;
             }
 
             .document {
                 box-shadow: none;
-                padding: 20px;
+                border: 1px solid var(--border);
             }
         }
     </style>
@@ -202,12 +227,8 @@
 
 <body>
     <div class="no-print">
-        <a href="index.html" style="color: var(--gray); text-decoration: none;"><i class="fas fa-arrow-left"></i> Back
-            to Website</a>
-        <button onclick="window.print()"
-            style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-            <i class="fas fa-print"></i> Print to PDF
-        </button>
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
+        <button onclick="window.print()"><i class="fas fa-print"></i> Print to PDF</button>
     </div>
 
     <div class="document">
@@ -222,109 +243,95 @@
             </div>
         </header>
 
-        <section>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Client Name</label>
-                    <input type="text" placeholder="_________________________________">
-                </div>
-                <div class="form-group">
-                    <label>Project Name</label>
-                    <input type="text" placeholder="_________________________________">
-                </div>
+        <section class="client-meta">
+            <div class="form-group">
+                <label>Client Name</label>
+                <input type="text" placeholder="_________________________________">
+            </div>
+            <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" placeholder="_________________________________">
             </div>
         </section>
 
         <h2>SECTION 1: BASIC INFORMATION</h2>
-        <h3>Project Overview (Base Prices)</h3>
-        <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="2500"> New website development
-            (+2,500 KES)</div>
-        <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="1500"> Website redesign/update
-            (+1,500 KES)</div>
-        <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Bug fixes/maintenance
-            (+500 KES)</div>
-        <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="1500"> Add new features
-            (+1,500 KES)</div>
-        <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="1000"> Mobile optimization
-            (+1,000 KES)</div>
+        <h3>What are we building today? (Base Package)</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="3000"> New
+                Landing Page (+3,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="8000"> New
+                Business Website (+8,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="12000"> New Full
+                System (+12,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="1500">
+                RedesignExisting (+1,500 KES)</label>
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="500"> Bug
+                Fixes/Support (+500 KES)</label>
+        </div>
 
         <h3>Target Audience</h3>
-        <div class="checklist-item"><input type="checkbox"> General public</div>
-        <div class="checklist-item"><input type="checkbox"> Young adults (18-35)</div>
-        <div class="checklist-item"><input type="checkbox"> Business professionals</div>
-        <div class="checklist-item"><input type="checkbox"> Local community</div>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox"> General public</label>
+            <label class="checklist-item"><input type="checkbox"> Young adults (18-35)</label>
+            <label class="checklist-item"><input type="checkbox"> Professionals</label>
+            <label class="checklist-item"><input type="checkbox"> Local community</label>
+        </div>
 
         <h2>SECTION 2: PAGES & CONTENT</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <h3>Essential Pages (+500 KES each)</h3>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Home page</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> About us page
-                </div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500">
-                    Services/Products</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Contact page
-                </div>
-            </div>
-            <div class="form-group">
-                <h3>Additional Pages (+500 KES each)</h3>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Blog/News</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500">
-                    Gallery/Portfolio</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> FAQ page</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Booking page
-                </div>
-            </div>
+        <h3>Essential Pages (+500 KES each)</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Home page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> About us page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500">
+                Services/Products</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Contact page</label>
+        </div>
+
+        <h3>Additional Pages (+500 KES each)</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Blog/News</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500">
+                Gallery/Portfolio</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> FAQ page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Booking page</label>
         </div>
 
         <h2>SECTION 3: DESIGN & BRANDING</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Primary Colors</label>
-                <input type="text">
-            </div>
-            <div class="form-group">
-                <label>Preferred Fonts</label>
-                <input type="text">
-            </div>
+        <div class="client-meta">
+            <div class="form-group"><label>Primary Colors</label><input type="text"></div>
+            <div class="form-group"><label>Preferred Fonts</label><input type="text"></div>
         </div>
-        <h3>Reference Websites</h3>
-        <div class="form-group"><label>1. URL/Description</label><input type="text"></div>
-        <div class="form-group"><label>2. URL/Description</label><input type="text"></div>
+        <div class="form-group"><label>Reference Website 1</label><input type="text" placeholder="URL/Description">
+        </div>
+        <div class="form-group" style="margin-top: 10px;"><label>Reference Website 2</label><input type="text"
+                placeholder="URL/Description"></div>
 
         <h2>SECTION 4: FUNCTIONAL REQUIREMENTS</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <h3>Essential (+500 KES each)</h3>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Mobile
-                    responsive</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> Contact form
-                </div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> SEO
-                    optimization</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="500"> WhatsApp Chat
-                </div>
-            </div>
-            <div class="form-group">
-                <h3>Advanced</h3>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="3500"> User login
-                    (+3,500 KES)</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="3500"> Admin dashboard
-                    (+3,500 KES)</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="2000"> M-Pesa
-                    Integration (+2,000 KES)</div>
-                <div class="checklist-item"><input type="checkbox" class="price-calc" data-price="5000"> E-commerce
-                    (+5,000 KES)</div>
-            </div>
+        <h3>Essential Features</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" checked disabled> Mobile responsive (Free)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Dynamic Contact Form
+                (+1,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> SEO optimization
+                (+1,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> WhatsApp Chat (+500
+                KES)</label>
+        </div>
+
+        <h3>Advanced Features</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3500"> User Login & Profiles
+                (+3,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="4000"> Admin Dashboard (+4,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> M-Pesa Integration
+                (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="5000"> Full E-commerce (+5,000
+                KES)</label>
         </div>
 
         <h2>SECTION 5: TIMELINE & BUDGET</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Desired Launch Date</label>
-                <input type="text">
-            </div>
-        </div>
+        <div class="form-group" style="max-width: 400px;"><label>Desired Launch Date</label><input type="date"></div>
 
         <div class="contact-box">
             <div>
@@ -339,35 +346,32 @@
             </div>
         </div>
 
-        <div class="footer-note">
-            <p>Thank you for choosing Nairobi Tech Solutions. We respond to all submissions within 1 hour!</p>
-        </div>
+        <p class="footer-note">Thank you for choosing Nairobi Tech Solutions. We respond within 1 hour!</p>
     </div>
 
-    <!-- Sticky Price Bar -->
     <div class="price-sticky">
-        <div class="price-label">Estimated Project Cost:</div>
-        <div class="price-display" id="totalChecklistPrice">0 KES</div>
-        <button onclick="window.print()">Save Quote & Requirements</button>
+        <div style="text-align: left;">
+            <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; color: var(--gray);">Estimated
+                Project Cost:</p>
+            <div class="total-amount" id="checklistTotal">0 KES</div>
+        </div>
+        <button class="save-btn" onclick="window.print()">Save Quote & Requirements</button>
     </div>
 
     <script>
         function updatePrice() {
             let total = 0;
-            const checkboxes = document.querySelectorAll('.price-calc:checked');
-            checkboxes.forEach(cb => {
-                total += parseInt(cb.getAttribute('data-price'));
+            document.querySelectorAll('.calc:checked').forEach(item => {
+                total += parseInt(item.getAttribute('data-price'));
             });
-
-            document.getElementById('totalChecklistPrice').innerText = total.toLocaleString() + ' KES';
+            document.getElementById('checklistTotal').innerText = total.toLocaleString() + ' KES';
         }
 
-        // Attach listeners
-        document.querySelectorAll('.price-calc').forEach(cb => {
-            cb.addEventListener('change', updatePrice);
+        document.querySelectorAll('.calc').forEach(item => {
+            item.addEventListener('change', updatePrice);
         });
 
-        // Initialize
+        // Initial calc
         updatePrice();
     </script>
 </body>

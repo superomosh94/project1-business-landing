@@ -166,14 +166,14 @@ function updateCalculator() {
     const typeBase = parseInt(typeSelect.value);
     const pages = parseInt(pagesInput.value);
 
-    pagesVal.innerText = `${pages} pages`;
+    pagesVal.innerText = `${pages} Page${pages > 1 ? 's' : ''}`;
 
     let featuresTotal = 0;
     document.querySelectorAll('.feature-cb:checked').forEach(cb => {
         featuresTotal += parseInt(cb.value);
     });
 
-    const total = typeBase + ((pages - 1) * 1000) + featuresTotal;
+    const total = typeBase + (pages * 500) + featuresTotal;
     totalPrice.innerText = total.toLocaleString() + ' KES';
 }
 
@@ -242,6 +242,7 @@ if (getQuoteBtn) {
             if (type.includes('Landing')) serviceSelect.value = 'landing';
             else if (type.includes('Business')) serviceSelect.value = 'website';
             else if (type.includes('Full System')) serviceSelect.value = 'system';
+            else if (type.includes('Redesign') || type.includes('Bug Fix')) serviceSelect.value = 'fix';
         }
 
         if (messageArea) {
