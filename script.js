@@ -2,13 +2,15 @@
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+    if (navToggle && navMenu && !navToggle.contains(e.target) && !navMenu.contains(e.target)) {
         navMenu.classList.remove('active');
     }
 });
@@ -24,7 +26,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
             // Close mobile menu if open
-            navMenu.classList.remove('active');
+            if (navMenu) navMenu.classList.remove('active');
 
             window.scrollTo({
                 top: targetElement.offsetTop - 80,
@@ -45,7 +47,6 @@ if (quoteForm) {
         const data = Object.fromEntries(formData);
 
         // In a real application, you would send this to your server
-        // For now, we'll show a success message
         alert('Thank you! We have received your quote request. We will contact you within 1 hour with a detailed quote.');
 
         // Reset form
@@ -53,9 +54,6 @@ if (quoteForm) {
 
         // Log data to console (remove in production)
         console.log('Quote Request:', data);
-
-        // Optional: Send to Google Sheets or email service
-        // sendToGoogleSheets(data);
     });
 }
 
@@ -65,7 +63,7 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
@@ -74,38 +72,17 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe service cards for animation
-document.querySelectorAll('.service-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(card);
+// Observe elements for animation
+document.querySelectorAll('.service-card, .testimonial-card, .process-step, .resource-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    fadeObserver.observe(el);
 });
-
-// Price calculator (simple version)
-function calculatePrice() {
-    // This can be expanded based on selected options
-    const serviceSelect = document.querySelector('select');
-    if (serviceSelect) {
-        serviceSelect.addEventListener('change', function () {
-            const prices = {
-                'landing': '4,000 - 8,000 KES',
-                'website': '10,000 - 25,000 KES',
-                'system': '15,000 - 40,000 KES',
-                'fix': '800 - 2,000 KES'
-            };
-
-            const priceDisplay = document.getElementById('priceDisplay');
-            if (priceDisplay) {
-                priceDisplay.textContent = prices[this.value] || '';
-            }
-        });
-    }
-}
 
 // WhatsApp integration
 function initWhatsApp() {
-    const phoneNumber = '+2547XXXXXXXXX'; // Replace with your number
+    const phoneNumber = '254742666803'; // Updated with user provided number
     const whatsappBtn = document.createElement('a');
     whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent('Hello! I need a quote for a website.')}`;
     whatsappBtn.className = 'whatsapp-float';
@@ -140,12 +117,262 @@ function initWhatsApp() {
     document.body.appendChild(whatsappBtn);
 }
 
+// FAQ Toggle
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+
+        answer.classList.toggle('active');
+        if (icon) {
+            icon.classList.toggle('fa-chevron-up');
+            icon.classList.toggle('fa-chevron-down');
+        }
+    });
+});
+
+// Price Calculator logic
+const priceModal = document.getElementById("priceCalculatorModal");
+const openCalcBtn = document.getElementById("openCalculator");
+const closeCalcBtn = document.querySelector("#priceCalculatorModal .close-modal");
+
+if (openCalcBtn && priceModal) {
+    openCalcBtn.onclick = function () {
+        priceModal.style.display = "block";
+    }
+}
+
+if (closeCalcBtn && priceModal) {
+    closeCalcBtn.onclick = function () {
+        priceModal.style.display = "none";
+    }
+}
+
+window.onclick = function (event) {
+    if (event.target == priceModal) {
+        priceModal.style.display = "none";
+    }
+}
+
+function updateCalculator() {
+    const typeSelect = document.getElementById('calcWebsiteType');
+    const pagesInput = document.getElementById('calcPages');
+    const pagesVal = document.getElementById('pagesValue');
+    const totalPrice = document.getElementById('calcTotalPrice');
+
+    if (!typeSelect || !pagesInput || !pagesVal || !totalPrice) return;
+
+    const typeBase = parseInt(typeSelect.value);
+    const pages = parseInt(pagesInput.value);
+
+    pagesVal.innerText = `${pages} pages`;
+
+    let featuresTotal = 0;
+    document.querySelectorAll('.feature-cb:checked').forEach(cb => {
+        featuresTotal += parseInt(cb.value);
+    });
+
+    const total = typeBase + ((pages - 1) * 1000) + featuresTotal;
+    totalPrice.innerText = total.toLocaleString() + ' KES';
+}
+
+document.getElementById('calcWebsiteType')?.addEventListener('change', updateCalculator);
+document.getElementById('calcPages')?.addEventListener('input', updateCalculator);
+document.querySelectorAll('.feature-cb').forEach(cb => {
+    cb.addEventListener('change', updateCalculator);
+});
+// M-Pesa Payment Instructions
+const mpesaBtn = document.getElementById('mpesaBtn');
+if (mpesaBtn) {
+    mpesaBtn.addEventListener('click', () => {
+        alert('M-PESA PAYMENT INSTRUCTIONS:\n\n1. Go to M-Pesa Menu\n2. Select Lipa na M-Pesa\n3. Select Buy Goods and Services\n4. Enter Till Number: 123456 (Placeholder)\n5. Enter Amount\n6. Enter your PIN and Send\n\nPlease share the confirmation message via WhatsApp.');
+    });
+}
+
+// Booking Slot Selection
+const slots = document.querySelectorAll('.slot');
+const messageArea = document.querySelector('#quoteForm textarea');
+if (slots.length > 0 && messageArea) {
+    slots.forEach(slot => {
+        slot.addEventListener('click', () => {
+            // Remove active from others
+            slots.forEach(s => s.style.background = 'var(--light)');
+            // Set active
+            slot.style.background = 'var(--primary)';
+            slot.style.color = 'white';
+
+            const time = slot.innerText;
+            messageArea.value = `I'd like to book a free consultation for: ${time}.`;
+            // Scroll to form nicely
+            document.getElementById('quoteForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+}
+
+// Coming Soon handler for # links that aren't anchors
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('a');
+    if (target && (target.getAttribute('href') === '#' || target.classList.contains('coming-soon-link'))) {
+        if (!target.getAttribute('href').startsWith('#home') &&
+            !target.getAttribute('href').startsWith('#services') &&
+            !target.getAttribute('href').startsWith('#pricing') &&
+            !target.getAttribute('href').startsWith('#portfolio') &&
+            !target.getAttribute('href').startsWith('#contact')) {
+            e.preventDefault();
+            alert('This feature is coming soon! Thank you for your interest.');
+        }
+    }
+});
+
+// Calculator "Get Exact Quote" redirection
+const getQuoteBtn = document.getElementById('getQuoteFromCalc');
+if (getQuoteBtn) {
+    getQuoteBtn.addEventListener('click', () => {
+        // Collect calculator info
+        const type = document.getElementById('calcWebsiteType').options[document.getElementById('calcWebsiteType').selectedIndex].text;
+        const total = document.getElementById('calcTotalPrice').innerText;
+
+        // Close modal
+        priceModal.style.display = "none";
+
+        // Pre-fill form
+        const serviceSelect = document.querySelector('#quoteForm select');
+        if (serviceSelect) {
+            if (type.includes('Landing')) serviceSelect.value = 'landing';
+            else if (type.includes('Business')) serviceSelect.value = 'website';
+            else if (type.includes('Full System')) serviceSelect.value = 'system';
+        }
+
+        if (messageArea) {
+            messageArea.value = `Estimated Quote from Calculator: ${total} for ${type}. Please provide exact details.`;
+        }
+
+        // Scroll to form
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
+// Service / Pricing Button Pre-fill
+const serviceOrderBtns = document.querySelectorAll('.service-order-btn');
+if (serviceOrderBtns.length > 0 && messageArea) {
+    serviceOrderBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const serviceName = btn.getAttribute('data-service');
+            const serviceSelect = document.querySelector('#quoteForm select');
+
+            // Set message
+            messageArea.value = `I am interested in ordering the ${serviceName}. Please provide more details on how to get started.`;
+
+            // Try to match dropdown
+            if (serviceSelect) {
+                if (serviceName.includes('Landing')) serviceSelect.value = 'landing';
+                else if (serviceName.includes('Business')) serviceSelect.value = 'website';
+                else if (serviceName.includes('Full System')) serviceSelect.value = 'system';
+                else if (serviceName.includes('Fix')) serviceSelect.value = 'fix';
+            }
+
+            // Smooth scroll to form (handled by existing anchor logic, but ensuring it pre-fills first)
+        });
+    });
+}
+
+// Live Chat Toggle
+const chatContainer = document.getElementById('liveChat');
+const toggleChatBtn = document.getElementById('chatToggle');
+const hideChatBtn = document.getElementById('closeChat');
+
+if (toggleChatBtn && chatContainer) {
+    toggleChatBtn.addEventListener('click', () => {
+        chatContainer.style.display = chatContainer.style.display === 'block' ? 'none' : 'block';
+    });
+}
+
+if (hideChatBtn && chatContainer) {
+    hideChatBtn.addEventListener('click', () => {
+        chatContainer.style.display = 'none';
+    });
+}
+
+// Performance Metrics Animation
+function animateCounter() {
+    const counters = document.querySelectorAll('.metric-number');
+
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const duration = 2000;
+        const stepTime = 20;
+        const totalSteps = duration / stepTime;
+        const increment = target / totalSteps;
+        let current = 0;
+
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.innerText = Math.ceil(current);
+                setTimeout(updateCounter, stepTime);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCounter();
+    });
+}
+
+// Observe metrics section
+const metricsSectionEl = document.querySelector('.metrics');
+if (metricsSectionEl) {
+    const observerMetrics = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter();
+                observerMetrics.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    observerMetrics.observe(metricsSectionEl);
+}
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    calculatePrice();
     initWhatsApp();
+    updateCalculator();
 
-    // Add active class to nav links based on scroll position
+    // Set Current Year
+    const yearSpan = document.getElementById('currentYear');
+    if (yearSpan) {
+        yearSpan.innerText = new Date().getFullYear();
+    }
+
+    // Loader fade-out
+    const pageLoader = document.getElementById('loader');
+    if (pageLoader) {
+        pageLoader.style.opacity = '0';
+        setTimeout(() => {
+            pageLoader.style.visibility = 'hidden';
+        }, 500);
+    }
+
+    // Cookie consent after delay
+    setTimeout(() => {
+        const consentPopup = document.getElementById('cookieConsent');
+        if (consentPopup && !localStorage.getItem('cookiesAccepted')) {
+            consentPopup.classList.add('active');
+        }
+    }, 2000);
+
+    // Cookie Accept
+    document.getElementById('acceptCookies')?.addEventListener('click', () => {
+        const consentPopup = document.getElementById('cookieConsent');
+        if (consentPopup) {
+            consentPopup.classList.remove('active');
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+    });
+
+    // Active nav links on scroll
     window.addEventListener('scroll', () => {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-menu a');
@@ -153,7 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             if (scrollY >= (sectionTop - 100)) {
                 current = section.getAttribute('id');
             }
