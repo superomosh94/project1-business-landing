@@ -71,16 +71,37 @@
             align-items: center;
         }
 
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo img {
+            height: 65px;
+            /* Increased from 55px */
+            background: white;
+            padding: 4px;
+            /* Reduced padding to zoom in more */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: scale(1.1);
+            /* Zoom effect */
+        }
+
         .company-info h1 {
             color: var(--primary);
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            letter-spacing: -0.02em;
         }
 
         .header-meta {
             text-align: right;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--gray);
+            line-height: 1.4;
         }
 
         .client-meta {
@@ -233,9 +254,12 @@
 
     <div class="document">
         <header>
-            <div class="company-info">
-                <h1>Website Requirements Checklist</h1>
-                <p>Nairobi Tech Solutions</p>
+            <div class="header-logo">
+                <img src="images/logo2_real.png" alt="Logo">
+                <div class="company-info">
+                    <h1>Website Requirements Checklist</h1>
+                    <p>Nairobi Tech Solutions</p>
+                </div>
             </div>
             <div class="header-meta">
                 <p>Contact: nrbitechsolutions@gmail.com</p>
