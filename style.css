@@ -82,6 +82,7 @@ h4 {
 
 .btn-primary:hover {
     background: var(--primary-dark);
+    color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23);
 }
@@ -89,6 +90,14 @@ h4 {
 .btn-secondary {
     background: var(--secondary);
     color: white;
+}
+
+.btn-secondary:hover {
+    background: #0d9668;
+    /* Slightly darker than --secondary */
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
 }
 
 .btn-outline {
