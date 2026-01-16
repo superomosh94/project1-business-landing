@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Requirements CheckList - Nairobi Tech Solutions</title>
+    <title>Website Requirements CheckList - Derivo Tech Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="images/logo2_real.png">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary: #2563eb;
+            --primary: #FF7B00;
             --dark: #1f2937;
             --gray: #6b7280;
             --light-gray: #f3f4f6;
@@ -250,20 +251,20 @@
 <body>
     <div class="no-print">
         <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
-        <button onclick="window.print()"><i class="fas fa-print"></i> Print to PDF</button>
+        <button onclick="printChecklist()"><i class="fas fa-print"></i> Print to PDF</button>
     </div>
 
     <div class="document">
         <header>
             <div class="header-logo">
-                <img src="images/logo2_real.png" alt="Logo">
+                <img src="images/derivo-logo.png" alt="Logo">
                 <div class="company-info">
                     <h1>Website Requirements Checklist</h1>
-                    <p>Nairobi Tech Solutions</p>
+                    <p>Derivo Tech Solutions</p>
                 </div>
             </div>
             <div class="header-meta">
-                <p>Contact: nrbitechsolutions@gmail.com</p>
+                <p>Contact: derivotechsolutions@gmail.com</p>
                 <p>Phone: 0742 666 803</p>
             </div>
         </header>
@@ -271,16 +272,15 @@
         <section class="client-meta">
             <div class="form-group">
                 <label>Client Name</label>
-                <input type="text" placeholder="_________________________________">
+                <input type="text" id="clientNameInput" placeholder="Enter Client Name">
             </div>
             <div class="form-group">
-                <label>Project Name</label>
-                <input type="text" placeholder="_________________________________">
+                <label>Project Name (Required for File Name)</label>
+                <input type="text" id="projectNameInput" placeholder="Enter Project Name">
             </div>
         </section>
 
-        <h2>SECTION 1: BASIC INFORMATION</h2>
-        <h3>What are we building today? (Base Package)</h3>
+        <h2>SECTION 1: PROJECT TYPE (Base Packages)</h2>
         <div class="checklist-grid">
             <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="3000"> New
                 Landing Page (+3,000 KES)</label>
@@ -288,30 +288,73 @@
                 Business Website (+8,000 KES)</label>
             <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="12000"> New Full
                 System (+12,000 KES)</label>
-            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="1500">
-                RedesignExisting (+1,500 KES)</label>
+            <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="1500"> Redesign
+                Existing (+1,500 KES)</label>
             <label class="checklist-item"><input type="radio" name="basePack" class="calc" data-price="500"> Bug
                 Fixes/Support (+500 KES)</label>
         </div>
 
-        <h3>Target Audience</h3>
+        <h2>SECTION 2: DATABASE & BACKEND</h2>
+        <h3>Database Type</h3>
         <div class="checklist-grid">
-            <label class="checklist-item"><input type="checkbox"> General public</label>
-            <label class="checklist-item"><input type="checkbox"> Young adults (18-35)</label>
-            <label class="checklist-item"><input type="checkbox"> Professionals</label>
-            <label class="checklist-item"><input type="checkbox"> Local community</label>
+            <label class="checklist-item"><input type="radio" name="dbType" class="calc" data-price="0"> No Database
+                (Static Site) (Free)</label>
+            <label class="checklist-item"><input type="radio" name="dbType" class="calc" data-price="2000"> MySQL
+                Database (+2,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="dbType" class="calc" data-price="2500"> MongoDB
+                (+2,500 KES)</label>
+            <label class="checklist-item"><input type="radio" name="dbType" class="calc" data-price="2500"> PostgreSQL
+                (+2,500 KES)</label>
+            <label class="checklist-item"><input type="radio" name="dbType" class="calc" data-price="1500"> SQLite
+                (+1,500 KES)</label>
+        </div>
+        <h3>Database Features</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3500"> User Registration/Login
+                System (+3,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="4000"> Content Management
+                System (CMS) (+4,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Product/Inventory
+                Database (+3,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3500"> Booking/Reservation
+                System (+3,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="5000"> Customer Relationship
+                Management (CRM) (+5,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Analytics/Reporting
+                Dashboard (+3,000 KES)</label>
         </div>
 
-        <h2>SECTION 2: PAGES & CONTENT</h2>
+        <h2>SECTION 3: HOSTING & DEPLOYMENT</h2>
+        <h3>Hosting Type</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="radio" name="hostingType" class="calc" data-price="0"> Shared
+                Hosting (Free 1st yr) (+0 KES)</label>
+            <label class="checklist-item"><input type="radio" name="hostingType" class="calc" data-price="5000"> VPS
+                Hosting (+5,000 KES/yr)</label>
+            <label class="checklist-item"><input type="radio" name="hostingType" class="calc" data-price="8000"> Cloud
+                Hosting (AWS/GCP) (+8,000 KES/yr)</label>
+            <label class="checklist-item"><input type="radio" name="hostingType" class="calc" data-price="15000">
+                Dedicated Server (+15,000 KES/yr)</label>
+        </div>
+        <h3>Domain & SSL</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Domain Registration
+                (.com/.co.ke) (+1,500 KES/yr)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> SSL Certificate (Paid)
+                (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Email Hosting (5
+                accounts) (+2,000 KES/yr)</label>
+        </div>
+
+        <h2>SECTION 4: PAGES & CONTENT</h2>
         <h3>Essential Pages (+500 KES each)</h3>
         <div class="checklist-grid">
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Home page</label>
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> About us page</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500">
-                Services/Products</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Services/Products
+                page</label>
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Contact page</label>
         </div>
-
         <h3>Additional Pages (+500 KES each)</h3>
         <div class="checklist-grid">
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Blog/News</label>
@@ -319,59 +362,182 @@
                 Gallery/Portfolio</label>
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> FAQ page</label>
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Booking page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Testimonials
+                page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Team page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Careers page</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Privacy
+                Policy/Terms</label>
         </div>
 
-        <h2>SECTION 3: DESIGN & BRANDING</h2>
-        <div class="client-meta">
-            <div class="form-group"><label>Primary Colors</label><input type="text"></div>
-            <div class="form-group"><label>Preferred Fonts</label><input type="text"></div>
-        </div>
-        <div class="form-group"><label>Reference Website 1</label><input type="text" placeholder="URL/Description">
-        </div>
-        <div class="form-group" style="margin-top: 10px;"><label>Reference Website 2</label><input type="text"
-                placeholder="URL/Description"></div>
-
-        <h2>SECTION 4: FUNCTIONAL REQUIREMENTS</h2>
-        <h3>Essential Features</h3>
+        <h2>SECTION 5: DESIGN & BRANDING</h2>
+        <h3>Design Level</h3>
         <div class="checklist-grid">
-            <label class="checklist-item"><input type="checkbox" checked disabled> Mobile responsive (Free)</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Dynamic Contact Form
-                (+1,500 KES)</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> SEO optimization
+            <label class="checklist-item"><input type="radio" name="designLevel" class="calc" data-price="0">
+                Template-based (Free)</label>
+            <label class="checklist-item"><input type="radio" name="designLevel" class="calc" data-price="5000"> Custom
+                Design (+5,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="designLevel" class="calc" data-price="2000"> Premium
+                Template (+2,000 KES)</label>
+        </div>
+        <h3>Branding Elements</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Logo Design/Integration
+                (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> Custom Color Scheme
                 (+1,000 KES)</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> WhatsApp Chat (+500
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> Custom Typography
+                (+1,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Favicon Creation (+500
                 KES)</label>
         </div>
 
+        <h2>SECTION 6: FUNCTIONAL FEATURES</h2>
+        <h3>Essential Features</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" checked disabled> Mobile Responsive (Free)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Contact Form (+1,500
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> SEO Optimization
+                (+1,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> WhatsApp Chat (+500
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Google Maps Integration
+                (+500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Social Media Integration
+                (+500 KES)</label>
+        </div>
+        <h3>E-commerce Features</h3>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Product Catalog (+3,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Shopping Cart (+2,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Payment Gateway
+                Integration (+3,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> M-Pesa Integration
+                (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2500"> Order Management
+                (+2,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Inventory Management
+                (+3,000 KES)</label>
+        </div>
         <h3>Advanced Features</h3>
         <div class="checklist-grid">
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="3500"> User Login & Profiles
                 (+3,500 KES)</label>
             <label class="checklist-item"><input type="checkbox" class="calc" data-price="4000"> Admin Dashboard (+4,000
                 KES)</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> M-Pesa Integration
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> File Upload System
                 (+2,000 KES)</label>
-            <label class="checklist-item"><input type="checkbox" class="calc" data-price="5000"> Full E-commerce (+5,000
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Search Functionality
+                (+1,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="4000"> Multi-language Support
+                (+4,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> API Integration (+3,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="4000"> Real-time Chat (+4,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2500"> Notification System
+                (+2,500 KES)</label>
+        </div>
+
+        <h2>SECTION 7: INTEGRATIONS</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> Google Analytics (+500
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Email Marketing
+                Integration (+1,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> Social Media Login
+                (+1,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2500"> Calendar/Booking System
+                (+2,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> SMS Integration (+2,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Third-party APIs
+                (+3,000 KES)</label>
+        </div>
+
+        <h2>SECTION 8: MAINTENANCE & SUPPORT</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="radio" name="support" class="calc" data-price="2000"> Basic
+                Maintenance (3 months) (+2,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="support" class="calc" data-price="4000"> Premium
+                Support (6 months) (+4,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="support" class="calc" data-price="6000"> Full
+                Maintenance Package (1 year) (+6,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Regular Updates (+3,000
+                KES/yr)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Backup Service (+2,000
+                KES/yr)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Security Monitoring
+                (+3,000 KES/yr)</label>
+        </div>
+
+        <h2>SECTION 9: CONTENT CREATION</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1000"> Copywriting (per page)
+                (+1,000 KES/page)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="5000"> Professional
+                Photography (+5,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Stock Images (+2,000
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Video Integration
+                (+3,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Content Migration
+                (+2,000 KES)</label>
+        </div>
+
+        <h2>SECTION 10: PERFORMANCE & SECURITY</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> Website Speed
+                Optimization (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Advanced Security
+                Features (+3,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2500"> DDoS Protection (+2,500
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Daily Backups (+1,500
+                KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="500"> SSL Configuration (+500
                 KES)</label>
         </div>
 
-        <h2>SECTION 5: TIMELINE & BUDGET</h2>
-        <div class="form-group" style="max-width: 400px;"><label>Desired Launch Date</label><input type="date"></div>
+        <h2>SECTION 11: TRAINING & DOCUMENTATION</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2000"> User Training (2 hours)
+                (+2,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="3000"> Admin Training (3
+                hours) (+3,000 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="1500"> Technical Documentation
+                (+1,500 KES)</label>
+            <label class="checklist-item"><input type="checkbox" class="calc" data-price="2500"> Video Tutorials (+2,500
+                KES)</label>
+        </div>
+
+        <h2>SECTION 12: TIMELINE OPTIONS</h2>
+        <div class="checklist-grid">
+            <label class="checklist-item"><input type="radio" name="timeline" class="calc" data-price="0"> Standard (4-6
+                weeks) (Free)</label>
+            <label class="checklist-item"><input type="radio" name="timeline" class="calc" data-price="3000"> Express
+                (2-3 weeks) (+3,000 KES)</label>
+            <label class="checklist-item"><input type="radio" name="timeline" class="calc" data-price="6000"> Urgent (1
+                week) (+6,000 KES)</label>
+        </div>
 
         <div class="contact-box">
             <div>
-                <strong>Nairobi Tech Solutions</strong><br>
+                <strong>Derivo Tech Solutions</strong><br>
                 Nairobi, Kenya<br>
                 Phone: 0742 666 803
             </div>
             <div style="text-align: right;">
-                Email: nrbitechsolutions@gmail.com<br>
+                Email: derivotechsolutions@gmail.com<br>
                 WhatsApp: 0742 666 803<br>
-                www.nairobitech.co.ke
+                www.derivotech.co.ke
             </div>
         </div>
 
-        <p class="footer-note">Thank you for choosing Nairobi Tech Solutions. We respond within 1 hour!</p>
+        <p class="footer-note">Thank you for choosing Derivo Tech Solutions. We respond within 1 hour!</p>
     </div>
 
     <div class="price-sticky">
@@ -380,9 +546,16 @@
                 Project Cost:</p>
             <div class="total-amount" id="checklistTotal">0 KES</div>
         </div>
-        <button class="save-btn" onclick="window.print()">Save Quote & Requirements</button>
+        <div style="display: flex; gap: 10px;">
+            <button class="save-btn" onclick="printChecklist()"><i class="fas fa-file-pdf"></i> Save PDF</button>
+            <button class="save-btn" style="background: #25D366;" onclick="sendViaWhatsApp()"><i
+                    class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+        </div>
     </div>
 
+    <a href="https://wa.me/254742666803" class="float-whatsapp no-print" target="_blank">
+        <i class="fab fa-whatsapp my-float"></i>
+    </a>
     <script>
         function updatePrice() {
             let total = 0;
@@ -395,6 +568,59 @@
         document.querySelectorAll('.calc').forEach(item => {
             item.addEventListener('change', updatePrice);
         });
+
+        function printChecklist() {
+            const projectInput = document.getElementById('projectNameInput');
+            const projectName = projectInput ? projectInput.value.trim() : '';
+
+            if (projectName !== '') {
+                // Configure PDF options
+                const element = document.querySelector('.document');
+                const opt = {
+                    margin: [10, 10, 10, 10],
+                    filename: projectName + ' - Requirements.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Show loading state
+                const btn = document.querySelector('.save-btn');
+                const originalText = btn.innerText;
+                btn.innerText = 'Generating PDF...';
+                btn.disabled = true;
+
+                // Generate PDF
+                html2pdf().set(opt).from(element).save().then(() => {
+                    // Reset button
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+
+                    // Show instruction to user
+                    setTimeout(() => {
+                        alert('PDF Downloaded Successfully!\n\nPlease email this file to: derivotechsolutions@gmail.com');
+                    }, 1000);
+                }).catch(err => {
+                    console.error(err);
+                    alert('Error generating PDF. Please try again.');
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+            } else {
+                alert('Please enter a Project Name/Company Name before saving the invoice PDF.');
+                if (projectInput) projectInput.focus();
+            }
+        }
+
+        function sendViaWhatsApp() {
+            const projectInput = document.getElementById('projectNameInput');
+            const projectName = projectInput ? projectInput.value.trim() : 'My Project';
+
+            const message = `Hi, I have downloaded the requirements checklist for ${projectName}. I am attaching the PDF file here.`;
+            const whatsappUrl = `https://wa.me/254742666803?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
 
         // Initial calc
         updatePrice();

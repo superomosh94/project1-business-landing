@@ -296,20 +296,68 @@ if (serviceOrderBtns.length > 0 && messageArea) {
     });
 }
 
-// Live Chat Toggle
+// Live Chat Functionality
 const chatContainer = document.getElementById('liveChat');
 const toggleChatBtn = document.getElementById('chatToggle');
 const hideChatBtn = document.getElementById('closeChat');
+const chatInput = document.querySelector('.chat-input input');
+const chatSendBtn = document.querySelector('.chat-input button');
+const chatBody = document.querySelector('.chat-body');
 
 if (toggleChatBtn && chatContainer) {
     toggleChatBtn.addEventListener('click', () => {
         chatContainer.style.display = chatContainer.style.display === 'block' ? 'none' : 'block';
+        if (chatContainer.style.display === 'block') {
+            // Focus input when opening
+            setTimeout(() => { if (chatInput) chatInput.focus(); }, 100);
+        }
     });
 }
 
 if (hideChatBtn && chatContainer) {
     hideChatBtn.addEventListener('click', () => {
         chatContainer.style.display = 'none';
+    });
+}
+
+// Chat Logic
+function sendMessage() {
+    if (!chatInput || !chatBody) return;
+
+    const message = chatInput.value.trim();
+    if (message !== '') {
+        // Add User Message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-message user';
+        userDiv.innerHTML = `<p>${message}</p>`; // Basic XSS protection needed in real apps, but ok for simple static text
+        chatBody.appendChild(userDiv);
+
+        chatInput.value = '';
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Simulate Bot Response
+        setTimeout(() => {
+            const botDiv = document.createElement('div');
+            botDiv.className = 'chat-message bot';
+            botDiv.innerHTML = `
+                <p>Thanks for your message! Our team is currently offline.</p>
+                <p>For fastest response, please <a href="https://wa.me/254742666803?text=${encodeURIComponent('Regarding question: ' + message)}" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: underline;">Chat on WhatsApp</a></p>
+            `;
+            chatBody.appendChild(botDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    }
+}
+
+if (chatSendBtn) {
+    chatSendBtn.addEventListener('click', sendMessage);
+}
+
+if (chatInput) {
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
     });
 }
 
@@ -368,19 +416,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Loader fade-out
     const pageLoader = document.getElementById('loader');
     if (pageLoader) {
-        pageLoader.style.opacity = '0';
         setTimeout(() => {
-            pageLoader.style.visibility = 'hidden';
-        }, 500);
+            pageLoader.style.opacity = '0';
+            setTimeout(() => {
+                pageLoader.style.visibility = 'hidden';
+            }, 500);
+        }, 1000);
     }
 
-    // Cookie consent after delay
-    setTimeout(() => {
-        const consentPopup = document.getElementById('cookieConsent');
-        if (consentPopup && !localStorage.getItem('cookiesAccepted')) {
-            consentPopup.classList.add('active');
-        }
-    }, 2000);
+    // Cookie consent immediately
+    const consentPopup = document.getElementById('cookieConsent');
+    if (consentPopup && !localStorage.getItem('cookiesAccepted')) {
+        consentPopup.classList.add('active');
+    }
 
     // Cookie Accept
     document.getElementById('acceptCookies')?.addEventListener('click', () => {

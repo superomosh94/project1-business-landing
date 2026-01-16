@@ -1,4 +1,4 @@
-# Nairobi Tech Solutions - Landing Page
+# Derivo Tech Solutions - Landing Page
 
 A professional landing page for a web development service targeting Kenyan businesses.
 

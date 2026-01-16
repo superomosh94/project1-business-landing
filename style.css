@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
+    --primary: #FF7B00;
+    --primary-dark: #E66F00;
     --secondary: #10b981;
     --dark: #1f2937;
     --light: #f8fafc;
@@ -1175,20 +1175,30 @@ h4 {
     height: 250px;
     overflow-y: auto;
     background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .chat-message {
-    background: white;
     padding: 10px 15px;
     border-radius: 10px;
-    margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     max-width: 80%;
+    word-wrap: break-word;
 }
 
-.bot {
-    background: var(--light-gray);
+.chat-message.bot {
+    background: white;
     align-self: flex-start;
+    border-bottom-left-radius: 0;
+}
+
+.chat-message.user {
+    background: var(--primary);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
 }
 
 .chat-input {
@@ -1316,18 +1326,92 @@ h4 {
     transition: opacity 0.5s ease-out, visibility 0.5s;
 }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid var(--light-gray);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+/* Tech Loader Styles */
+.loader-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes spin {
-    to {
+.circle-outer {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-top-color: #FF7B00;
+    border-right-color: #FF7B00;
+    border-bottom-color: #FF7B00;
+    border-radius: 50%;
+    animation: spin-cw 2s linear infinite;
+    filter: drop-shadow(0 0 5px #FF7B00);
+}
+
+.circle-inner {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    border-top-color: #FFA500;
+    border-left-color: #FFA500;
+    border-bottom-color: #FFA500;
+    border-radius: 50%;
+    animation: spin-ccw 1.5s linear infinite;
+    filter: drop-shadow(0 0 4px #FFA500);
+}
+
+.brand-letter {
+    font-size: 3rem;
+    font-weight: 800;
+    font-style: italic;
+    color: #FF7B00;
+    position: relative;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+    animation: pulse-d 2s ease-in-out infinite;
+}
+
+/* Spinning Animations */
+@keyframes spin-cw {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-ccw {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse-d {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(255, 123, 0, 1), 0 0 30px rgba(255, 123, 0, 0.6);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 123, 0, 0.8);
+        opacity: 1;
     }
 }
 
@@ -1558,4 +1642,106 @@ h4 {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Cookie Consent */
+#cookieConsent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+#cookieConsent.active {
+    display: flex;
+}
+
+#cookieConsent p {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+#cookieConsent button {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+#cookieConsent button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+}
+
+/* Floating WhatsApp Button */
+.float-whatsapp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 90px;
+    right: 20px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.float-whatsapp:hover {
+    background-color: #128c7e;
+    transform: scale(1.1);
+    color: white;
+}
+
+/* Button Group for Packages */
+.package-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-whatsapp-outline {
+    background: transparent;
+    color: #25d366;
+    border: 2px solid #25d366;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+    display: block;
+    margin-top: 5px;
+}
+
+.btn-whatsapp-outline:hover {
+    background: #25d366;
+    color: white;
 }
