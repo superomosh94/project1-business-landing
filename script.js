@@ -276,12 +276,29 @@ if (getQuoteBtn) {
 const serviceOrderBtns = document.querySelectorAll('.service-order-btn');
 if (serviceOrderBtns.length > 0 && messageArea) {
     serviceOrderBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const serviceName = btn.getAttribute('data-service');
+            const servicePrice = btn.getAttribute('data-price');
+            const serviceFeatures = btn.getAttribute('data-features');
             const serviceSelect = document.querySelector('#quoteForm select');
 
-            // Set message
-            messageArea.value = `I am interested in ordering the ${serviceName}. Please provide more details on how to get started.`;
+            // Construct email details
+            const emailRecipient = 'derivotechsolutions@gmail.com';
+            const subject = encodeURIComponent(`Order Request: ${serviceName}`);
+            const body = encodeURIComponent(
+                `I am interested in ordering the ${serviceName}. with ${serviceFeatures.replace(/,/g, '\n')}\n\nPlease provide more details on how to get started.\n\n` +
+                `Selected Package Details:\n` +
+                `- Package: ${serviceName}\n` +
+                `- Price: ${servicePrice}\n\n` +
+                `Best regards,\n[Your Name]`
+            );
+
+            // Open default email client
+            window.location.href = `mailto:${emailRecipient}?subject=${subject}&body=${body}`;
+
+            // Set message area in contact form
+            messageArea.value = `I am interested in ordering the ${serviceName}. with ${serviceFeatures}.\n\nPlease provide more details on how to get started.`;
 
             // Try to match dropdown
             if (serviceSelect) {
@@ -291,7 +308,11 @@ if (serviceOrderBtns.length > 0 && messageArea) {
                 else if (serviceName.includes('Fix')) serviceSelect.value = 'fix';
             }
 
-            // Smooth scroll to form (handled by existing anchor logic, but ensuring it pre-fills first)
+            // Smooth scroll to form
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 }
