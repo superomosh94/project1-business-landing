@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post | Derivo Tech Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/derivo-logo.png" alt="Derivo Tech Solutions Logo" height="40">
+                <span>Derivo Tech Solutions</span>
+            </a>
+
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="checklist.html" class="btn btn-primary">Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area (Rendered by blog.js) -->
+    <main class="blog-post-content-area" style="margin-top: 100px; min-height: 60vh;">
+        <div class="container" style="text-align: center; padding: 100px 0;">
+            <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--primary);"></i>
+            <p style="margin-top: 20px;">Loading tech guide...</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/derivo-logo.png" alt="Logo" height="40">
+                    <h3>Derivo Tech Solutions</h3>
+                    <p>Fast web solutions for Kenyan businesses</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> 0742 666 803</p>
+                    <p><i class="fas fa-envelope"></i> derivotechsolutions@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Derivo Tech Solutions. <a href="privacy.html"
+                        style="color: inherit; margin-left:10px;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="blog-data.js"></script>
+    <script src="blog.js"></script>
+</body>
+
+</html>

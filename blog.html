@@ -4,34 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Insights | Derivo Tech Solutions - Grow Online</title>
+    <title>Tech Blogs & Guides | Derivo Tech Solutions - Powering Your Business</title>
     <meta name="description"
-        content="Read our latest insights on web design, performance, and digital marketing trends. Practical advice to help Kenyan businesses succeed in the digital world.">
+        content="Explore practical tech guides, hardware reviews, and web development insights tailored for Kenyan businesses and developers.">
     <meta name="keywords"
-        content="blog Derivo Tech Solutions, web design tips Kenya, mobile-first design, website speed revenue, Kenyan business growth online">
+        content="tech blogs Kenya, web development guides, hardware buying guides Nairobi, hosting reviews Kenya, business tech strategy">
     <link rel="canonical" href="https://nrbitechsolutions.vercel.app/blog.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nrbitechsolutions.vercel.app/blog.html">
-    <meta property="og:title" content="Blog & Insights | Derivo Tech Solutions - Grow Online">
-    <meta property="og:description"
-        content="Stay ahead with the latest trends and practical advice for growing your business online in Kenya.">
+    <meta property="og:title" content="Tech Blogs & Guides | Derivo Tech Solutions">
+    <meta property="og:description" content="Expert tech insights and practical guides for the Kenyan market.">
     <meta property="og:image" content="https://nrbitechsolutions.vercel.app/images/hero-bg.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://nrbitechsolutions.vercel.app/blog.html">
-    <meta property="twitter:title" content="Blog & Insights | Derivo Tech Solutions - Grow Online">
-    <meta property="twitter:description"
-        content="Stay ahead with the latest trends and practical advice for growing your business online in Kenya.">
-    <meta property="twitter:image" content="https://nrbitechsolutions.vercel.app/images/hero-bg.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
@@ -59,75 +51,67 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header blog-hero">
+    <!-- Page Header (Hero style from ii.html) -->
+    <section class="page-header"
+        style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; padding: 100px 0; text-align: center;">
         <div class="container">
-            <h1 class="hero-title">Insights for <span class="highlight">Business Growth</span></h1>
-            <p class="hero-subtitle">Practical advice and trends to help Kenyan businesses succeed online.</p>
+            <h1 class="hero-title" style="color: white;">Tech Insights for <span class="highlight">Kenyan
+                    Businesses</span></h1>
+            <p class="hero-subtitle" style="color: #ccc; margin: 0 auto;">Practical guides, cost-effective solutions,
+                and expert advice tailored for the Kenyan market.</p>
         </div>
     </section>
 
-    <!-- Blog Posts Grid -->
-    <section class="blog-grid-section section-padding">
+    <!-- Blogs Section -->
+    <section class="blogs-section" id="blogs">
         <div class="container">
-            <div class="blog-grid">
-                <!-- Blog Post 1 -->
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="images/hero-bg.jpg" alt="Mobile First Design">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> Jan 15, 2024</span>
-                            <span><i class="fas fa-tag"></i> Strategy</span>
-                        </div>
-                        <h3>Why Mobile-First is Non-Negotiable in 2024</h3>
-                        <p>Explore how Kenya’s mobile-heavy internet usage dictates your business success and why
-                            responsive design is your best friend.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="images/service1.jpg" alt="Website Speed">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> Jan 12, 2024</span>
-                            <span><i class="fas fa-tag"></i> Performance</span>
-                        </div>
-                        <h3>Website Speed = Revenue</h3>
-                        <p>A simple guide on how performance optimization keeps customers from leaving and boosts your
-                            search engine rankings.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="images/case1.jpg" alt="Web Features">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> Jan 10, 2024</span>
-                            <span><i class="fas fa-tag"></i> Marketing</span>
-                        </div>
-                        <h3>From Static to Strategic: Must-Have Features</h3>
-                        <p>5 essential features that turn a simple "digital brochure" into a powerful
-                            customer-generating machine for your business.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Topics</button>
+                <button class="category-btn" data-category="hosting">Hosting & Servers</button>
+                <button class="category-btn" data-category="hardware">Hardware Guides</button>
+                <button class="category-btn" data-category="development">Development</button>
+                <button class="category-btn" data-category="business">Business & Startup</button>
             </div>
 
-            <!-- Pagination (Placeholder) -->
-            <div class="pagination" style="text-align: center; margin-top: 50px;">
-                <span class="page-num active">1</span>
-                <span class="page-num">2</span>
-                <span class="page-num">Next <i class="fas fa-chevron-right"></i></span>
+            <!-- Loading State -->
+            <div class="loading" id="loadingState">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-file-alt" style="font-size: 50px; margin-bottom: 20px;"></i>
+                <h3>No Blogs Found</h3>
+                <p>Try selecting a different category or check back later.</p>
+            </div>
+
+            <!-- Blogs Grid -->
+            <div class="blogs-grid" id="blogsGrid">
+                <!-- Blog cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Blog Container (SPA) -->
+    <section class="blog-container" id="blogContainer">
+        <div class="container">
+            <div class="blog-header" id="blogHeader">
+                <!-- Blog header content will be dynamically inserted here -->
+            </div>
+
+            <div id="featuredImage">
+                <!-- Featured image will be dynamically inserted here -->
+            </div>
+
+            <div class="blog-body" id="blogBody">
+                <!-- Blog content will be dynamically inserted here -->
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#" class="back-to-blogs" id="backToBlogs">
+                    <i class="fas fa-arrow-left"></i> Back to All Blogs
+                </a>
             </div>
         </div>
     </section>
@@ -166,7 +150,10 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="blog-data.js"></script>
+    <script src="blog.js"></script>
 </body>
 
 </html>
